@@ -1,0 +1,4 @@
+yolo_tiny_configs/
+None
+[INFO] loading YOLO from disk...
+Exception  'NoneType' object has no attribute 'shape'

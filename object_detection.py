@@ -105,17 +105,30 @@ def do_prediction(image, net, LABELS):
 
     # TODO Prepare the output as required to the assignment specification
     # ensure at least one detection exists
-    res =[]
+    res = []
     if len(idxs) > 0:
         # loop over the indexes we are keeping
         for i in idxs.flatten():
-            res.append("detected item:{}, accuracy:{}, X:{}, Y:{}, width:{}, height:{}".format(LABELS[classIDs[i]],
-                                                                                          confidences[i],
-                                                                                          boxes[i][0],
-                                                                                          boxes[i][1],
-                                                                                          boxes[i][2],
-                                                                                          boxes[i][3]))
+            tempObj = {
+                "label": LABELS[classIDs[i]],
+                "accuracy": confidences[i],
+                "rectangle": {
+                    "height":float(boxes[i][3]) ,
+                    "left":float(boxes[i][0]),
+                    "top": float(boxes[i][1]),
+                    "width": float(boxes[i][2])
+                }
+            }
+            print(tempObj)
+            res.append(tempObj)
+            # res.append("detected item:{}, accuracy:{}, X:{}, Y:{}, width:{}, height:{}".format(LABELS[classIDs[i]],
+            #                                                                                    confidences[i],
+            #                                                                                    boxes[i][0],
+            #                                                                                    boxes[i][1],
+            #                                                                                    boxes[i][2],
+            #                                                                                    boxes[i][3]))
     return res
+
 
 ## argument
 
@@ -142,9 +155,8 @@ def base64_cv2(base64_str):
 # TODO, you should  make this console script into webservice using Flask
 def detectImage(imageURL):
     try:
-        image =base64_cv2(imageURL)
+        image = base64_cv2(imageURL)
         # load the neural net.  Should be local to this method as its multi-threaded endpoint
-        print(image)
         nets = load_model(CFG, Weights)
         return do_prediction(image, nets, Lables)
 
@@ -152,5 +164,3 @@ def detectImage(imageURL):
     except Exception as e:
 
         print("Exception  {}".format(e))
-
-

@@ -18,4 +18,4 @@ If any linux dependencies  are required, you shall install them based on system 
  python object_detection.py yolo_tiny_configs/ image3.jpg
 
 
-python iWebLens_client.py  test/  http://localhost:5000/api/detectImage 4
+python iWebLens_client.py  inputfolder/  http://118.138.242.52:5000/api/detectImage 2

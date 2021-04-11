@@ -10,7 +10,7 @@ itsdangerous
 Jinja2
 MarkupSafe
 numpy 
-opencv-python
+opencv-python-headless
 pycparser
 pyOpenSSL
 requests 
